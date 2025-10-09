@@ -1,0 +1,1 @@
+This code will deploy two ec2 instance, each will have diffrent AMI and  diffrent Subnets

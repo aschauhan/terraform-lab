@@ -1,0 +1,1 @@
+This code will deploy 4 ec2 instance, 2 in same subnet and 2 in other subnet
