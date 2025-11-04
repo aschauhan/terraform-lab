@@ -77,7 +77,7 @@ variable "application_ou_name" { type = string }
 variable "environment" { type = string }
 variable "region" { type = string }
 
-# variable "base_tags" {
-#   type    = map(string)
-#   default = { "Created by" = "Cloud Network Team" }
-# }
+variable "base_tags" {
+  type    = map(string)
+  default = { "Created by" = "Cloud Network Team" }
+}

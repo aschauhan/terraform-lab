@@ -8,7 +8,11 @@ module "vpc" {
   vpc_cidr         = var.vpc_cidr
   additional_cidrs = var.additional_cidrs
   name             = var.name
-  tags             = merge(local.common_tags, var.tags)
+  application_ou_name = var.application_ou_name
+  environment         = var.environment
+  region              = var.region
+  base_tags           = var.base_tags
+ # tags             = merge(local.common_tags, var.tags)
 }
 
 # ---------------- Subnets ----------------
