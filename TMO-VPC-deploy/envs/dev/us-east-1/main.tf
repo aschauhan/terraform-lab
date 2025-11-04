@@ -27,6 +27,36 @@ module "subnets" {
   depends_on = [module.vpc]
 }
 
+# -------------------------
+# Network ACLs
+# -------------------------
+module "nacls" {
+  source   = "../../../modules/nacls"
+  vpc_id   = module.vpc.vpc_id
+  vpc_cidr = var.vpc_cidr
+  name     = var.name
+
+  public_subnet_map = {
+    "public-a" = module.subnets.public_subnets[0]
+    "public-b" = module.subnets.public_subnets[1]
+    "public-c" = module.subnets.public_subnets[2]
+  }
+
+  private_subnet_map = {
+    "private-a" = module.subnets.private_subnets[0]
+    "private-b" = module.subnets.private_subnets[1]
+    "private-c" = module.subnets.private_subnets[2]
+  }
+
+  nonroutable_subnet_map = {
+    "nonroutable-a" = module.subnets.nonroutable_subnets[0]
+    "nonroutable-b" = module.subnets.nonroutable_subnets[1]
+    "nonroutable-c" = module.subnets.nonroutable_subnets[2]
+  }
+
+  tags = merge(local.common_tags, var.tags)
+}
+
 # ---------------- Gateways ----------------
 module "gateways" {
   source            = "../../../modules/gateways"
@@ -90,10 +120,12 @@ module "ssm_endpoints" {
   name              = var.name
   subnet_ids        = module.subnets.private_subnets
   security_group_id = module.security.endpoints_sg_id
-  route_table_ids   = concat(
-    [module.route_tables.public_route_table_id],
-    module.route_tables.private_route_table_ids,
-    module.route_tables.nonroutable_route_table_ids
+  route_table_ids = concat(
+  [module.route_tables.public_route_table_id],
+  module.route_tables.private_route_table_ids,
+  module.route_tables.nonroutable_route_table_ids
   )
   tags              = merge(local.common_tags, var.tags)
+
+  depends_on = [module.vpc]
 }

@@ -29,7 +29,7 @@ variable "route_table_ids" {
 }
 
 variable "tags" {
-  description = "Tags to apply to all endpoint resources"
+  description = "Tags to apply to all resources in this module"
   type        = map(string)
   default     = {}
 }

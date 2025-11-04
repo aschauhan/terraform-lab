@@ -2,6 +2,8 @@
 # Environment Metadata
 # -------------------------
 name     = "dev-us-east-1"
+application_ou_name = "ntw"
+environment = "dev"
 region   = "us-east-1"
 azs      = ["us-east-1a", "us-east-1b", "us-east-1c"]
 
