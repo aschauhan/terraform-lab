@@ -47,3 +47,13 @@ domain_name_servers  = ["AmazonProvidedDNS"]
 ntp_servers          = ["169.254.169.123"]
 netbios_name_servers = ["10.0.101.10"]
 netbios_node_type    = 2
+
+# -------------------------
+# Optional Tags
+# -------------------------
+tags = {
+  Environment = "dev"
+  Project     = "vpc-setup"
+  Owner       = "Nitin"
+  ManagedBy   = "Terraform"
+}

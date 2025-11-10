@@ -32,6 +32,8 @@ resource "aws_subnet" "nonroutable" {
   )
 }
 
+
+# Additional CIDR subnets
 resource "aws_subnet" "additional" {
   count             = length(var.additional_subnet_cidrs)
   vpc_id            = var.vpc_id

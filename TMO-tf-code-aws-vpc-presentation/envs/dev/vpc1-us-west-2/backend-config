@@ -1,0 +1,4 @@
+bucket         = "tmo-aws-tf-state-bucket"
+key            = "envs/dev/vpc1-us-west-2/terraform.tfstate"
+region         = "us-east-1"
+encrypt = true

@@ -1,5 +1,5 @@
 provider "aws" {
-  region     = "us-east-1"
+  region     = "us-west-2"
 }
 
 # ---------------- VPC ----------------
@@ -26,6 +26,7 @@ module "subnets" {
   nonroutable_subnet_cidrs = var.nonroutable_subnet_cidrs
   additional_subnet_cidrs  = var.additional_subnet_cidrs
   tags                     = merge(local.common_tags, var.tags)
+
   depends_on = [module.vpc]
 }
 
@@ -115,7 +116,7 @@ module "dhcp_options" {
 module "ssm_endpoints" {
   source            = "../../../modules/vpc-endpoints"
   vpc_id            = module.vpc.vpc_id
-  region            = "us-east-1"
+  region            = var.region
   name              = var.name
   subnet_ids        = module.subnets.private_subnets
   security_group_id = module.security.endpoints_sg_id

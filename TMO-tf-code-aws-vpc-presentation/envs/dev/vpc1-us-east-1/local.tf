@@ -2,7 +2,7 @@ locals {
   common_tags = {
     Environment = "dev"
     Project     = "vpc-setup"
-    Owner       = "HCL LAB"
+    Owner       = "TMO"
     ManagedBy   = "Terraform"
   }
 }

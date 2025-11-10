@@ -26,6 +26,7 @@ module "subnets" {
   nonroutable_subnet_cidrs = var.nonroutable_subnet_cidrs
   additional_subnet_cidrs  = var.additional_subnet_cidrs
   tags                     = merge(local.common_tags, var.tags)
+
   depends_on = [module.vpc]
 }
 
@@ -120,7 +121,6 @@ module "ssm_endpoints" {
   subnet_ids        = module.subnets.private_subnets
   security_group_id = module.security.endpoints_sg_id
   route_table_ids = concat(
-  [module.route_tables.public_route_table_id],
   module.route_tables.private_route_table_ids,
   module.route_tables.nonroutable_route_table_ids
   )

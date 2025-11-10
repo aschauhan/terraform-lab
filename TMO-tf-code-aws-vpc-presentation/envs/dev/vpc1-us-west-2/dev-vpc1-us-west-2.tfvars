@@ -1,11 +1,11 @@
 # -------------------------
 # Environment Metadata
 # -------------------------
-name     = "dev-us-east-1"
+name     = "dev-us-west-2"
 application_ou_name = "ntw"
 environment = "dev"
-region   = "us-east-1"
-azs      = ["us-east-1a", "us-east-1b", "us-east-1c"]
+region   = "us-west-2"
+azs      = ["us-west-2a", "us-west-2b", "us-west-2c"]
 
 # -------------------------
 # VPC CIDRs
@@ -47,3 +47,13 @@ domain_name_servers  = ["AmazonProvidedDNS"]
 ntp_servers          = ["169.254.169.123"]
 netbios_name_servers = ["10.0.101.10"]
 netbios_node_type    = 2
+
+# -------------------------
+# Optional Tags
+# -------------------------
+tags = {
+  Environment = "dev"
+  Project     = "vpc-setup"
+  Owner       = "Nitin"
+  ManagedBy   = "Terraform"
+}
