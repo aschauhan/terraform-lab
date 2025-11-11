@@ -3,7 +3,17 @@
 # -------------------------
 resource "aws_network_acl" "public" {
   vpc_id = var.vpc_id
-  tags   = merge({ Name = "${var.name}-nacl-public" }, var.tags)
+  tags = merge(
+  {
+    Name                  = "${var.application_ou_name}-${var.environment}-public-nacl-${var.region}"
+    "Resource Type"       = "nacl"
+    "Creation Date"       = timestamp()
+    "Environment"         = var.environment
+    "Application ou name" = var.application_ou_name
+    "Created by"          = "Cloud Network Team"
+    "Region"              = var.region
+  },var.base_tags
+  )
 }
 
 resource "aws_network_acl_rule" "public_inbound" {
@@ -35,7 +45,17 @@ resource "aws_network_acl_association" "public" {
 # -------------------------
 resource "aws_network_acl" "private" {
   vpc_id = var.vpc_id
-  tags   = merge({ Name = "${var.name}-nacl-private" }, var.tags)
+  tags = merge(
+  {
+    Name                  = "${var.application_ou_name}-${var.environment}-private-nacl-${var.region}"
+    "Resource Type"       = "nacl"
+    "Creation Date"       = timestamp()
+    "Environment"         = var.environment
+    "Application ou name" = var.application_ou_name
+    "Created by"          = "Cloud Network Team"
+    "Region"              = var.region
+  },var.base_tags
+  )
 }
 
 resource "aws_network_acl_rule" "private_outbound_https" {
@@ -71,7 +91,17 @@ resource "aws_network_acl_association" "private" {
 # -------------------------
 resource "aws_network_acl" "nonroutable" {
   vpc_id = var.vpc_id
-  tags   = merge({ Name = "${var.name}-nacl-nonroutable" }, var.tags)
+  tags = merge(
+  {
+    Name                  = "${var.application_ou_name}-${var.environment}-non-rt-nacl-${var.region}"
+    "Resource Type"       = "nacl"
+    "Creation Date"       = timestamp()
+    "Environment"         = var.environment
+    "Application ou name" = var.application_ou_name
+    "Created by"          = "Cloud Network Team"
+    "Region"              = var.region
+  },var.base_tags
+  )
 }
 
 resource "aws_network_acl_rule" "nonroutable_outbound_internal" {

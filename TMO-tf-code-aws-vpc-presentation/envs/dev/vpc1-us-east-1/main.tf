@@ -21,6 +21,10 @@ module "subnets" {
   vpc_id                   = module.vpc.vpc_id
   name                     = var.name
   azs                      = var.azs
+  application_ou_name = var.application_ou_name
+  environment         = var.environment
+  region              = var.region
+  base_tags           = var.base_tags
   public_subnet_cidrs      = var.public_subnet_cidrs
   private_subnet_cidrs     = var.private_subnet_cidrs
   nonroutable_subnet_cidrs = var.nonroutable_subnet_cidrs
@@ -38,6 +42,10 @@ module "nacls" {
   vpc_id   = module.vpc.vpc_id
   vpc_cidr = var.vpc_cidr
   name     = var.name
+  application_ou_name = var.application_ou_name
+  environment         = var.environment
+  region              = var.region
+  base_tags           = var.base_tags
 
   public_subnet_map = {
     "public-a" = module.subnets.public_subnets[0]
@@ -57,6 +65,8 @@ module "nacls" {
     "nonroutable-c" = module.subnets.nonroutable_subnets[2]
   }
 
+
+
   tags = merge(local.common_tags, var.tags)
 }
 
@@ -68,6 +78,10 @@ module "gateways" {
   public_subnet_id  = module.subnets.public_subnets[0]
   private_subnet_id = module.subnets.private_subnets[0]
   tags              = merge(local.common_tags, var.tags)
+  application_ou_name = var.application_ou_name
+  environment         = var.environment
+  region              = var.region
+  base_tags           = var.base_tags
 
   depends_on = [module.subnets]
 }
@@ -83,6 +97,10 @@ module "route_tables" {
   public_subnet_ids      = module.subnets.public_subnets
   private_subnet_ids     = module.subnets.private_subnets
   nonroutable_subnet_ids = module.subnets.nonroutable_subnets
+  application_ou_name = var.application_ou_name
+  environment         = var.environment
+  region              = var.region
+  base_tags           = var.base_tags
   tags                   = merge(local.common_tags, var.tags)
 
   depends_on = [module.gateways, module.subnets]
@@ -109,6 +127,10 @@ module "dhcp_options" {
   netbios_name_servers = var.netbios_name_servers
   netbios_node_type    = var.netbios_node_type
   tags                 = merge(local.common_tags, var.tags)
+  application_ou_name = var.application_ou_name
+  environment         = var.environment
+  region              = var.region
+  base_tags           = var.base_tags
 
   depends_on = [module.vpc]
 }
@@ -116,7 +138,7 @@ module "dhcp_options" {
 module "ssm_endpoints" {
   source            = "../../../modules/vpc-endpoints"
   vpc_id            = module.vpc.vpc_id
-  region            = "us-east-1"
+  region            = var.region
   name              = var.name
   subnet_ids        = module.subnets.private_subnets
   security_group_id = module.security.endpoints_sg_id
@@ -125,6 +147,10 @@ module "ssm_endpoints" {
   module.route_tables.nonroutable_route_table_ids
   )
   tags              = merge(local.common_tags, var.tags)
+  application_ou_name = var.application_ou_name
+  environment         = var.environment
+  #region              = var.region
+  base_tags           = var.base_tags
 
   depends_on = [module.vpc]
 }

@@ -10,8 +10,15 @@ resource "aws_vpc_endpoint" "ssm" {
   private_dns_enabled = true
 
   tags = merge(
-    { Name = "${var.name}-ssm-endpoint" },
-    var.tags
+  {
+    Name                  = "${var.application_ou_name}-${var.environment}-ssm-${var.region}"
+    "Resource Type"       = "endpoint"
+    "Creation Date"       = timestamp()
+    "Environment"         = var.environment
+    "Application ou name" = var.application_ou_name
+    "Created by"          = "Cloud Network Team"
+    "Region"              = var.region
+  },var.base_tags
   )
 }
 
@@ -24,8 +31,15 @@ resource "aws_vpc_endpoint" "ec2messages" {
   private_dns_enabled = true
 
   tags = merge(
-    { Name = "${var.name}-ec2messages-endpoint" },
-    var.tags
+  {
+    Name                  = "${var.application_ou_name}-${var.environment}-ec2-messages-${var.region}"
+    "Resource Type"       = "endpoint"
+    "Creation Date"       = timestamp()
+    "Environment"         = var.environment
+    "Application ou name" = var.application_ou_name
+    "Created by"          = "Cloud Network Team"
+    "Region"              = var.region
+  },var.base_tags
   )
 }
 
@@ -38,8 +52,15 @@ resource "aws_vpc_endpoint" "ssmmessages" {
   private_dns_enabled = true
 
   tags = merge(
-    { Name = "${var.name}-ssmmessages-endpoint" },
-    var.tags
+  {
+    Name                  = "${var.application_ou_name}-${var.environment}-ssm-messages-${var.region}"
+    "Resource Type"       = "endpoint"
+    "Creation Date"       = timestamp()
+    "Environment"         = var.environment
+    "Application ou name" = var.application_ou_name
+    "Created by"          = "Cloud Network Team"
+    "Region"              = var.region
+  },var.base_tags
   )
 }
 
@@ -55,8 +76,15 @@ resource "aws_vpc_endpoint" "logs" {
   private_dns_enabled = true
 
   tags = merge(
-    { Name = "${var.name}-logs-endpoint" },
-    var.tags
+  {
+    Name                  = "${var.application_ou_name}-${var.environment}-logs-${var.region}"
+    "Resource Type"       = "endpoint"
+    "Creation Date"       = timestamp()
+    "Environment"         = var.environment
+    "Application ou name" = var.application_ou_name
+    "Created by"          = "Cloud Network Team"
+    "Region"              = var.region
+  },var.base_tags
   )
 }
 
@@ -70,7 +98,14 @@ resource "aws_vpc_endpoint" "s3" {
   route_table_ids   = var.route_table_ids
 
   tags = merge(
-    { Name = "${var.name}-s3-endpoint" },
-    var.tags
+  {
+    Name                  = "${var.application_ou_name}-${var.environment}-s3-${var.region}"
+    "Resource Type"       = "endpoint"
+    "Creation Date"       = timestamp()
+    "Environment"         = var.environment
+    "Application ou name" = var.application_ou_name
+    "Created by"          = "Cloud Network Team"
+    "Region"              = var.region
+  },var.base_tags
   )
 }

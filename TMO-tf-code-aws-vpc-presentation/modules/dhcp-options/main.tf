@@ -6,10 +6,15 @@ resource "aws_vpc_dhcp_options" "this" {
   netbios_node_type    = var.netbios_node_type
 
   tags = merge(
-    {
-      Name = "${var.name}-dhcp-options"
-    },
-    var.tags
+  {
+    Name                  = "${var.application_ou_name}-${var.environment}-dhcp-options-${var.region}"
+    "Resource Type"       = "dhcp-option"
+    "Creation Date"       = timestamp()
+    "Environment"         = var.environment
+    "Application ou name" = var.application_ou_name
+    "Created by"          = "Cloud Network Team"
+    "Region"              = var.region
+  },var.base_tags
   )
 }
 

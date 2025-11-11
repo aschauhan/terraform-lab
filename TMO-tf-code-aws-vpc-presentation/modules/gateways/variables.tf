@@ -7,3 +7,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+ # NEWly added tags below
+variable "application_ou_name" { type = string }
+variable "environment" { type = string }
+variable "region" { type = string }
+variable "base_tags" { type = map(string) }
+#variable "vpc_id" { type = string }

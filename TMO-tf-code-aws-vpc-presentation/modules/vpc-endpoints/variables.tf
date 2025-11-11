@@ -3,10 +3,10 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "region" {
-  description = "AWS region for endpoint service names"
-  type        = string
-}
+# variable "region" {
+#   description = "AWS region for endpoint service names"
+#   type        = string
+# }
 
 variable "name" {
   description = "Environment or project name used for naming resources"
@@ -33,3 +33,10 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+  # NEWly added tags below
+variable "application_ou_name" { type = string }
+variable "environment" { type = string }
+variable "region" { type = string }
+variable "base_tags" { type = map(string) }
+#variable "vpc_id" { type = string }

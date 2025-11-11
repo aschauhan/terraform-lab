@@ -10,8 +10,15 @@ resource "aws_route_table" "public" {
   }
 
   tags = merge(
-    { Name = "${var.name}-public-rt" },
-    var.tags
+  {
+    Name                  = "${var.application_ou_name}-${var.environment}-public-rt-${var.region}"
+    "Resource Type"       = "routing-table"
+    "Creation Date"       = timestamp()
+    "Environment"         = var.environment
+    "Application ou name" = var.application_ou_name
+    "Created by"          = "Cloud Network Team"
+    "Region"              = var.region
+  },var.base_tags
   )
 }
 
@@ -34,8 +41,15 @@ resource "aws_route_table" "private" {
   }
 
   tags = merge(
-    { Name = "${var.name}-private-rt-${count.index}" },
-    var.tags
+  {
+    Name                  = "${var.application_ou_name}-${var.environment}-private-rt-${var.region}"
+    "Resource Type"       = "routing-table"
+    "Creation Date"       = timestamp()
+    "Environment"         = var.environment
+    "Application ou name" = var.application_ou_name
+    "Created by"          = "Cloud Network Team"
+    "Region"              = var.region
+  },var.base_tags
   )
 }
 
@@ -64,8 +78,15 @@ resource "aws_route_table" "nonroutable" {
 
 
   tags = merge(
-    { Name = "${var.name}-nonroutable-rt-${count.index}" },
-    var.tags
+  {
+    Name                  = "${var.application_ou_name}-${var.environment}-nonroutable-rt-${var.region}"
+    "Resource Type"       = "routing-table"
+    "Creation Date"       = timestamp()
+    "Environment"         = var.environment
+    "Application ou name" = var.application_ou_name
+    "Created by"          = "Cloud Network Team"
+    "Region"              = var.region
+  },var.base_tags
   )
 }
 

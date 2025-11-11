@@ -5,8 +5,15 @@ resource "aws_subnet" "public" {
   availability_zone       = var.azs[count.index]
   map_public_ip_on_launch = true
   tags = merge(
-    { Name = "${var.name}-public-${count.index}" },
-    var.tags
+  {
+    Name                  = "${var.application_ou_name}-${var.environment}-subnet-${var.region}"
+    "Resource Type"       = "subnet"
+    "Creation Date"       = timestamp()
+    "Environment"         = var.environment
+    "Application ou name" = var.application_ou_name
+    "Created by"          = "Cloud Network Team"
+    "Region"              = var.region
+  },var.base_tags
   )
 }
 
@@ -16,8 +23,15 @@ resource "aws_subnet" "private" {
   cidr_block        = var.private_subnet_cidrs[count.index]
   availability_zone = var.azs[count.index]
   tags = merge(
-    { Name = "${var.name}-private-${count.index}" },
-    var.tags
+  {
+    Name                  = "${var.application_ou_name}-${var.environment}-subnet-${var.region}"
+    "Resource Type"       = "subnet"
+    "Creation Date"       = timestamp()
+    "Environment"         = var.environment
+    "Application ou name" = var.application_ou_name
+    "Created by"          = "Cloud Network Team"
+    "Region"              = var.region
+  },var.base_tags
   )
 }
 
@@ -27,8 +41,15 @@ resource "aws_subnet" "nonroutable" {
   cidr_block        = var.nonroutable_subnet_cidrs[count.index]
   availability_zone = var.azs[count.index]
   tags = merge(
-    { Name = "${var.name}-nonroutable-${count.index}" },
-    var.tags
+  {
+    Name                  = "${var.application_ou_name}-${var.environment}-subnet-${var.region}"
+    "Resource Type"       = "subnet"
+    "Creation Date"       = timestamp()
+    "Environment"         = var.environment
+    "Application ou name" = var.application_ou_name
+    "Created by"          = "Cloud Network Team"
+    "Region"              = var.region
+  },var.base_tags
   )
 }
 
