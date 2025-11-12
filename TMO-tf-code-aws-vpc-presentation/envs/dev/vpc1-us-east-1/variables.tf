@@ -79,5 +79,10 @@ variable "region" { type = string }
 
 variable "base_tags" {
   type    = map(string)
-  default = { "Created by" = "Cloud Network Team" }
+  default = { "Developer" = "Cloud Network Devops Team" }
 }
+
+# variable "base_2_tags" {
+#   type    = map(string)
+#   default = { "suggested_by" = "Terraform Team" }
+# }

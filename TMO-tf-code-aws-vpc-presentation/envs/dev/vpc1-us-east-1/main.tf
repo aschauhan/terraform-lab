@@ -29,7 +29,7 @@ module "subnets" {
   private_subnet_cidrs     = var.private_subnet_cidrs
   nonroutable_subnet_cidrs = var.nonroutable_subnet_cidrs
   additional_subnet_cidrs  = var.additional_subnet_cidrs
-  tags                     = merge(local.common_tags, var.tags)
+  # tags                     = merge(local.common_tags, var.tags)
 
   depends_on = [module.vpc]
 }
@@ -67,7 +67,7 @@ module "nacls" {
 
 
 
-  tags = merge(local.common_tags, var.tags)
+  # tags = merge(local.common_tags, var.tags)
 }
 
 # ---------------- Gateways ----------------
@@ -77,7 +77,7 @@ module "gateways" {
   name              = var.name
   public_subnet_id  = module.subnets.public_subnets[0]
   private_subnet_id = module.subnets.private_subnets[0]
-  tags              = merge(local.common_tags, var.tags)
+  # tags              = merge(local.common_tags, var.tags)
   application_ou_name = var.application_ou_name
   environment         = var.environment
   region              = var.region
@@ -101,7 +101,7 @@ module "route_tables" {
   environment         = var.environment
   region              = var.region
   base_tags           = var.base_tags
-  tags                   = merge(local.common_tags, var.tags)
+  # tags                   = merge(local.common_tags, var.tags)
 
   depends_on = [module.gateways, module.subnets]
 }
@@ -111,7 +111,7 @@ module "security" {
   source = "../../../modules/security"
   vpc_id = module.vpc.vpc_id
   name   = var.name
-  tags   = merge(local.common_tags, var.tags)
+  # tags   = merge(local.common_tags, var.tags)
 
   depends_on = [module.vpc]
 }
@@ -126,7 +126,7 @@ module "dhcp_options" {
   ntp_servers          = var.ntp_servers
   netbios_name_servers = var.netbios_name_servers
   netbios_node_type    = var.netbios_node_type
-  tags                 = merge(local.common_tags, var.tags)
+  # tags                 = merge(local.common_tags, var.tags)
   application_ou_name = var.application_ou_name
   environment         = var.environment
   region              = var.region
@@ -146,7 +146,7 @@ module "ssm_endpoints" {
   module.route_tables.private_route_table_ids,
   module.route_tables.nonroutable_route_table_ids
   )
-  tags              = merge(local.common_tags, var.tags)
+  # tags              = merge(local.common_tags, var.tags)
   application_ou_name = var.application_ou_name
   environment         = var.environment
   #region              = var.region

@@ -15,4 +15,10 @@ variable "application_ou_name" { type = string }
 variable "environment" { type = string }
 variable "region" { type = string }
 variable "base_tags" { type = map(string) }
-#variable "vpc_id" { type = string }
+
+
+## Testing Tag ##### 
+# variable "base_2_tags" {
+#   type    = map(string)
+#   default = { "suggested_by" = "Terraform Team" }
+# }
